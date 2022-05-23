@@ -16,7 +16,7 @@ import DateNav from "./DateNav";
 function Dashboard() {
   const [reservations, setReservations] = useState([]);
   const [tables, setTables] = useState([]);
-  const [error, setError] = useState(null);
+  const [reservationsError, setReservationsError] = useState(null);
   let queryDate = useQuery().get("date");
 
   if (!queryDate) {
@@ -26,7 +26,7 @@ function Dashboard() {
   useEffect(() => {
     async function loadDashboard() {
       const abortController = new AbortController();
-      setError(null);
+      setReservationsError(null);
       try {
         const reservationData = await listReservations(
           { date: queryDate },
@@ -43,7 +43,7 @@ function Dashboard() {
         }
         setTables(tableData);
       } catch (err) {
-        setError(err.message);
+        setReservationsError(err.message);
       }
       return () => abortController.abort();
     }

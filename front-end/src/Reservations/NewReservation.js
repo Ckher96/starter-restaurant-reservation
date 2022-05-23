@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  postReservation,
-  updateReservation,
-  readReservation,
-} from "../utils/api";
+import React, { useState } from "react";
+import { postReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-function Form() {
+function NewReservation() {
   const [form, setForm] = useState({
     first_name: "",
     last_name: "",
@@ -43,7 +39,6 @@ function Form() {
       return readRes();
     }
   }, [editting, reservationId]);
-
   async function submitHandle(event) {
     event.preventDefault();
     try {
@@ -173,4 +168,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default NewReservation;
