@@ -42,13 +42,12 @@ function NewReservation() {
   async function submitHandle(event) {
     event.preventDefault();
     try {
-      const abortController = new AbortController()
       form.people = parseInt(form.people);
       let newPost = null;
       if (editting) {
-        newPost = await updateReservation(form, abortController.signal);
+        newPost = await updateReservation(form);
       } else {
-        newPost = await postReservation(form, abortController.signal);
+        newPost = await postReservation(form);
       }
       if (newPost.error) {
         throw newPost.error;
@@ -67,12 +66,21 @@ function NewReservation() {
     setForm({ ...form, [event.target.name]: event.target.value });
   }
 
+  function FormTitle() {
+    if (editting) {
+      return <h2>Edit Reservation</h2>;
+    } else {
+      return <h2>Create Reservation</h2>;
+    }
+  }
+
   return (
     <div>
       <form
         onSubmit={submitHandle}
         className="d-flex flex-column col-6 text-center m-auto font-weight-bolder"
       >
+        <FormTitle />
         <ErrorAlert error={error} />
         <div className="my-2">
           <div className="bg-info text-white border-bottom border-dark">

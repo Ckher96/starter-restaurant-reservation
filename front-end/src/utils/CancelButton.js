@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { cancelReservation } from "../utils/api";
+import { cancelReservation } from "./api";
 
 function CancelButton({ reservation, setError }) {
   const history = useHistory();

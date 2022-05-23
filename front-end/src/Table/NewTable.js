@@ -14,10 +14,9 @@ function NewTable() {
 
   async function submitHandle(event) {
     event.preventDefault();
-    const abortController = new AbortController()
     try {
       form.capacity = parseInt(form.capacity);
-      const newPost = await postTable(form, abortController.signal);
+      const newPost = await postTable(form);
 
       if (newPost.error) {
         throw newPost.error.message;

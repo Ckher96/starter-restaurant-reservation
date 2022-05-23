@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ErrorAlert from "../layout/ErrorAlert";
 import { listReservations } from "../utils/api";
-import CancelButton from "../Buttons/CancelButton";
-import EditButton from "../Buttons/EditButton";
+import CancelButton from "../utils/CancelButton";
+import EditButton from "../utils/EditButton";
 
 function Search() {
   const [number, setNumber] = useState({ mobile_number: "" });
