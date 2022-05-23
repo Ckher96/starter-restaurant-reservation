@@ -3,8 +3,8 @@ import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
-import ReservationList from "./ReservationList";
-import TableList from "./TableList";
+import ReservationList from "../Reservations/ReservationList";
+import TableList from "../Table/TableList";
 import DateNav from "./DateNav";
 
 /**
@@ -16,7 +16,7 @@ import DateNav from "./DateNav";
 function Dashboard() {
   const [reservations, setReservations] = useState([]);
   const [tables, setTables] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
+  const [error, setError] = useState(null);
   let queryDate = useQuery().get("date");
 
   if (!queryDate) {
@@ -26,7 +26,7 @@ function Dashboard() {
   useEffect(() => {
     async function loadDashboard() {
       const abortController = new AbortController();
-      setReservationsError(null);
+      setError(null);
       try {
         const reservationData = await listReservations(
           { date: queryDate },
@@ -43,7 +43,7 @@ function Dashboard() {
         }
         setTables(tableData);
       } catch (err) {
-        setReservationsError(err.message);
+        setError(err.message);
       }
       return () => abortController.abort();
     }
