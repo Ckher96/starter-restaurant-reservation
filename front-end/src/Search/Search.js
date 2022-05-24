@@ -3,6 +3,7 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { listReservations } from "../utils/api";
 import CancelButton from "../Buttons/CancelButton";
 import EditButton from "../Buttons/EditButton";
+import SeatButton from "../Buttons/SeatButton";
 
 function Search() {
   const [number, setNumber] = useState({ mobile_number: "" });
@@ -15,11 +16,15 @@ function Search() {
 
   async function submitHandle(event) {
     event.preventDefault();
+    const abortController = new AbortController();
     setError(null);
     try {
-      const data = await listReservations({
-        mobile_number: number.mobile_number,
-      });
+      const data = await listReservations(
+        {
+          mobile_number: number.mobile_number,
+        },
+        abortController.signal
+      );
       if (data.length === 0) {
         throw new Error("No reservations found");
       }
@@ -35,14 +40,18 @@ function Search() {
 
   const formatedReservations = reservations.map((reservation) => {
     return (
-      <div key={reservation.reservation_id} className="border border-dark w-50 m-4 mx-auto rounded-lg">
+      <div
+        key={reservation.reservation_id}
+        className="border border-dark w-50 m-4 mx-auto rounded-lg"
+      >
         <div className="bg-secondary text-white p-2">
           <h5>{reservation.first_name}</h5>
         </div>
         <div className="border-bottom border-dark p-2">
           <h5>Status : {reservation.status}</h5>
         </div>
-        <div className="p-2 btn group">
+        <div className="p-2 btn">
+          <SeatButton reservation={reservation} />
           <EditButton reservation={reservation} />
           <CancelButton reservation={reservation} setError={setError} />
         </div>

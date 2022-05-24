@@ -4,7 +4,6 @@ import EditButton from "../Buttons/EditButton";
 import SeatButton from "../Buttons/SeatButton";
 
 function ReservationList({ reservationData, setError }) {
-
   const formatedReservations = reservationData.map((reservation) => {
     return (
       <div

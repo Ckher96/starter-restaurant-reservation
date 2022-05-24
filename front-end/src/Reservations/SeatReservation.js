@@ -64,17 +64,22 @@ function SeatReservation() {
           <div className="bg-info text-white border-bottom border-dark">
             <label htmlFor="table_name">Table Name</label>
           </div>
-          <div className='border border-dark'>
-<select name="table_id" id="table_name" onChange={changeHandle} >
-            <option value="">--Please choose a table--</option>
-            {tableOptions}
-          </select>
+          <div className="border border-dark">
+            <select name="table_id" id="table_name" onChange={changeHandle}>
+              <option value="">--Please choose a table--</option>
+              {tableOptions}
+            </select>
           </div>
-          
         </div>
         <div className="btn-group border border-dark rounded-lg">
-          <button type="submit" className="btn btn-success">Submit</button>
-          <button type="button" onClick={cancelHandle} className='btn btn-danger'>
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
+          <button
+            type="button"
+            onClick={cancelHandle}
+            className="btn btn-danger"
+          >
             Cancel
           </button>
         </div>
